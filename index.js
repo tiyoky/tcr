@@ -1,13 +1,13 @@
-const Discord = require('discord.js');
-const client = new Discord.Client({
+const { Client, Intents } = require('discord.js');
+const client = new Client({
     intents: [
-        Discord.Intents.FLAGS.GUILDS, // Intention pour recevoir des informations sur les serveurs
-        Discord.Intents.FLAGS.GUILD_MESSAGES // Intention pour recevoir des messages dans les serveurs
+        Intents.FLAGS.GUILDS, // Intention pour recevoir des informations sur les serveurs
+        Intents.FLAGS.GUILD_MESSAGES // Intention pour recevoir des messages dans les serveurs
     ]
 });
 const prefix = '+';
 
-client.on('message', message => {
+client.on('messageCreate', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -50,4 +50,4 @@ function generateToken() {
     return token;
 }
 
-client.login('process.env.TOKEN'); // Remplacez YOUR_BOT_TOKEN par le token de votre bot Discord
+client.login(process.env.TOKEN); // Utilisez process.env.TOKEN directement
